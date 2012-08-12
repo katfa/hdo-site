@@ -61,34 +61,54 @@ var HDO = HDO || {};
       var self = this;
       $(self.options.categoriesSelector).css('border-right', 'solid 1px #EEE');
 
+      if (self.options.partiesSelector !== null) {
+        $(self.options.partiesSelector).find('a').on('click', function (e) {
+          removeActiveClass(self.options.partiesSelector);
+          $(this).parent().addClass('active');
+          showSpecificParty(categoryId, $(this).attr('id'));
 
-      $(self.options.categoriesSelector).find('a').on('click', function (e) {
+          e.preventDefault();
+          return false;
+        });
 
-        removeActiveClass(self.options.categoriesSelector);
-        $(this).parent().addClass('active');
+         $(self.options.categoriesSelector).find('a').on('click', function (e) {
 
-        removeActiveClass(self.options.partiesSelector);
-        $('#showAll').parent().addClass('active');
+          removeActiveClass(self.options.categoriesSelector);
+          $(this).parent().addClass('active');
 
-        var target = $(self.options.targetSelector);
+          removeActiveClass(self.options.partiesSelector);
+          $('#showAll').parent().addClass('active');
 
-        target.empty().append('<div id="' + bodyName + '"></div>');
+          var target = $(self.options.targetSelector);
 
-        categoryId = $(this).attr('id');
-        showAllPromisesInCategory(categoryId);
+          target.empty().append('<div id="' + bodyName + '"></div>');
 
-        e.preventDefault();
-        return false;
-      });
+          categoryId = $(this).attr('id');
+          showAllPromisesInCategory(categoryId);
 
-      $(self.options.partiesSelector).find('a').on('click', function (e) {
-        removeActiveClass(self.options.partiesSelector);
-        $(this).parent().addClass('active');
-        showSpecificParty(categoryId, $(this).attr('id'));
+          e.preventDefault();
+          return false;
+        });
 
-        e.preventDefault();
-        return false;
-      });
+      } else {
+        $(self.options.categoriesSelector).find('a').on('click', function (e) {
+          removeActiveClass(self.options.categoriesSelector);
+          $(this).parent().addClass('active');
+
+          var target = $(self.options.targetSelector);
+
+          target.empty().append('<div id="' + bodyName + '"></div>');
+
+          categoryId = $(this).attr('id');
+          // partyId = document.URL.substring(document.URL.lastIndexOf('/') + 1)
+          // showSpecificParty(categoryId, partyId)
+
+        });
+
+      }
+        
+
+      
     }
   };
 }(HDO, jQuery));
