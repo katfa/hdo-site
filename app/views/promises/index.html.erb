@@ -4,20 +4,9 @@
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span3 categories">
-      <!-- LEFT COLUMN --> 
-      <br>
-      <h2><%= Category.model_name.human(count: 2).capitalize %></h2>
-      <ul class="nav nav-stacked nav-pills">
-        <% @categories.each do |category| %>
-        <li>
-          <a href="/promises/category/<%= category.id %>" 
-            id="<%= category.id %>">
-              <%= category.human_name %>
-          </a>
-        </li>
-        <% end %>
-      </ul>
+    <!-- LEFT COLUMN --> 
+    <div class="span3">
+      <%= render 'shared/main_categories_list' %>
     </div>     
 
     <!-- MIDDLE -->
